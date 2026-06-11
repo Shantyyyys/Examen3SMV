@@ -27,4 +27,14 @@ class DatabaseHelper(context: Context) :
         }
         return db.insert("players", null, values)
     }
+    fun getPlayer(username: String, password: String): Boolean {
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM players WHERE username = ? AND password = ?",
+            arrayOf(username, password)
+        )
+        val exists = cursor.count > 0
+        cursor.close()
+        return exists
+    }
 }
