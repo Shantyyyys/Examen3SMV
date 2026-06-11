@@ -37,4 +37,14 @@ class DatabaseHelper(context: Context) :
         cursor.close()
         return exists
     }
+    fun playerExists(username: String): Boolean {
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM players WHERE username = ?",
+            arrayOf(username)
+        )
+        val exists = cursor.count > 0
+        cursor.close()
+        return exists
+    }
 }

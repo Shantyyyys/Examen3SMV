@@ -29,6 +29,11 @@ class SignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (dbHelper.playerExists(username)) {
+                Toast.makeText(this, "El usuario ya está registrado", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val result = dbHelper.insertPlayer(username, password)
             if (result != -1L) {
                 Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
